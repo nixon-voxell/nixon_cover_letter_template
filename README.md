@@ -1,6 +1,6 @@
-# Nixon's Resume
+# Nixon's Cover Letter Template
 
-This repository is where Nixon stores his resume. This way, Nixon will be able to keep track of all his resume versions and changes.
+This repository is where Nixon stores his cover letter template.
 
 ## Credit
 
