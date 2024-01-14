@@ -45,7 +45,7 @@
   ]
 }
 
-#let resume(author: (), date: "", body) = {
+#let letter(author: (), date: "", recipient: "Sir/Madam", body) = {
   set document(
     author: author.firstname + " " + author.lastname, 
     title: "resume",
@@ -71,7 +71,7 @@
           #author.firstname
           #author.lastname
           #sym.dot.c
-          #"Résumé"
+          #"Cover Letter"
         ]
       ][
         #counter(page).display()
@@ -163,162 +163,29 @@
     #box[#contacts1]
   ]
 
-  body
-}
-
-// general style
-#let resume_section(title) = {
   set text(
-    size: 16pt,
-    weight: "regular",
-    fill: white
+    size: 12pt,
+    hyphenate: false,
   )
-  align(left)[
-    #box(fill: black, inset: 4pt)[
-      #smallcaps[
-        // #text[#title.slice(0, 3)]#strong[#text[#title.slice(3)]]
-        #strong[#text[#title]]
-      ]
-    ]
-    #box(width: 1fr, line(length: 100%))
-  ]
-}
 
-#let resume_item(body) = {
-  set text(size: 10pt, style: "normal", weight: "light")
-  set par(leading: 0.65em)
-  body
-}
-
-#let resume_time(body) = {
-  set text(weight: "light", style: "italic", size: 9pt)
-  body
-}
-
-#let resume_degree(body) = {
-  set text(size: 10pt, weight: "light")
-  smallcaps[#body]
-}
-
-#let resume_organization(body) = {
-  set text(size: 12pt, style: "normal", weight: "bold")
-  body
-}
-
-#let resume_location(body) = {
-  set text(size: 12pt, style: "italic", weight: "light")
-  body
-}
-
-#let resume_position(body) = {
-  set text(size: 10pt, weight: "regular")
-  smallcaps[#body]
-}
-
-#let resume_category(body) = {
-  set text(size: 11pt, weight: "bold")
-  body
-}
-
-#let resume_gpa(numerator, denominator) = {
-  set text(size: 12pt, style: "italic", weight: "light")
-  text[Cumulative GPA: #box[#strong[#numerator] / #denominator]]
-}
-
-// sections specific components
-#let education_item(organization, degree, gpa, time_frame) = {
-  set block(above: 0.7em, below: 0.7em)
-  set pad(top: 5pt)
-  pad[
-    #justify_align[
-      #resume_organization[#organization]
-    ][
-      #gpa
-    ]
-    #justify_align[
-      #resume_degree[#degree]
-    ][
-      #resume_time[#time_frame]
-    ]
-  ]
-}
-
-#let work_experience_item_header(
-  position,
-  company,
-  location,
-  time_frame
-) = {
-  set block(above: 0.7em, below: 0.7em)
-  set pad(top: 5pt)
-  pad[
-    #justify_align[
-      #resume_organization[#position]
-    ][
-      #resume_location[#location]
-    ]
-    #justify_align[
-      #resume_position[#company]
-    ][
-      #resume_time[#time_frame]
-    ]
-  ]
-}
-
-#let project_item_header(
-  name,
-  url,
-) = {
-  set block(above: 0.7em, below: 0.7em)
-  set pad(top: 5pt)
-  pad[
-    #justify_align[
-      #resume_organization[#name]
-    ][
-      #text(style: "italic", size: 8pt)[#link(url)]
-    ]
-  ]
-}
-
-#let award_item_header(
-  name,
-  time,
-) = {
-  set block(above: 0.7em, below: 0.7em)
-  set pad(top: 5pt)
-  pad[
-    #justify_align[
-      #resume_organization[#name]
-    ][
-      #resume_time[#time]
-    ]
-  ]
-}
-
-#let item_and_link(
-  name,
-  url,
-) = {
-  set block(above: 0.7em, below: 0.7em)
-  set pad(top: 5pt)
-  pad[
-    #resume_organization[#name]
-    #resume_item[- #link(url)]
-  ]
-}
-
-#let skill_item(category, items) = {
-  set block(above: 1.0em, below: 1.0em)
-  
-  grid(
-    columns: (18fr, 80fr),
-    gutter: 10pt,
-    align(right)[
-      #resume_category[#category]
-    ],
-    align(left)[
-      #set text(size: 11pt, style: "normal", weight: "light")
-      #items.join(", ")
-    ],
+  set par(
+    first-line-indent: 18pt,
+    leading: 10pt,
+    justify: true,
   )
+
+  [
+    #linebreak()
+    #line(length: 100%)
+
+    #linebreak()
+    Dear #recipient \
+    #linebreak()
+
+    #body
+
+    #linebreak() \
+    Best Regards, \
+    _ #author.firstname _
+  ]
 }
